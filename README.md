@@ -1,3 +1,36 @@
+# liwy-oscafe-admin
+
+> A Vue.js project
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
+```
+
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+
 # liwy-oscafe-admin 开源小屋前端管理系统
 
 [![GitHub license](https://img.shields.io/github/license/liwyspace/liwy-oscafe.svg)](https://github.com/liwyspace/liwy-oscafe/blob/master/LICENSE)
@@ -132,6 +165,44 @@ npm run webpack-dev
 npm run webpack-dev-server
 # 使用webpack-生产模式
 npm run webpack-prod
+```
+
+## 6. 常用命令
+```bash
+# yarn 常用命令
+##初始化
+yarn init
+##添加依赖包
+yarn add [package]
+yarn add [package]@[version]
+yarn add [package]@[tag]
+##将依赖项添加到不同依赖项类别中
+yarn add [package] --dev
+yarn add [package] --peer
+yarn add [package] --optional
+##升级依赖包
+yarn upgrade [package]
+yarn upgrade [package]@[version]
+yarn upgrade [package]@[tag]
+##全局操作
+yarn global add [package]
+yarn global upgrade
+##移除依赖包
+yarn remove [package]
+##安装项目的全部依赖
+yarn
+###or
+yarn install
+
+#VUE-CLI使用
+## 安装
+npm install -g @vue/cli
+###OR
+yarn global add @vue/cli
+## 创建项目
+vue create hello-world
+## 使用webpack作为构建工具
+vue init webpack hello-world
 ```
 
 ## 7. 项目总结

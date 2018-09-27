@@ -51,7 +51,8 @@
                     "logoPic": "http://localhost:9000/uploads/urlico.png"
                 }
             ]
-        },{
+        },
+        {
             "type": "2",
             "typeName": "LINUX学习网站",
             "collects": [

@@ -36,6 +36,7 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src'),
+            '~': resolve('static')
         }
     },
     module: {
@@ -90,9 +91,9 @@ module.exports = {
         child_process: 'empty'
     },
     externals: {
-        $: "jquery",
-        jQuery: "jquery",
-        jquery: "jquery",
-        "window.jQuery": "jquery"
+        $: "jQuery",
+        jQuery: "jQuery",
+        jquery: "jQuery",
+        "window.jQuery": "jQuery"
     }
 }

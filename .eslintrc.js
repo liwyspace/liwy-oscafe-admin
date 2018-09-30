@@ -7,6 +7,7 @@ module.exports = {
     },
     env: {
         browser: true,
+        jquery: true
     },
     extends: [
         // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
@@ -38,7 +39,8 @@ module.exports = {
                 'for': {"after": false},
                 'while': {"after": false}
             }
-        }]
+        }],
+        'handle-callback-err': 'off' // 关闭异常必须处理
     },
     overrides: [
         {

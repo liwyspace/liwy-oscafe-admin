@@ -40,7 +40,8 @@ module.exports = {
                 'while': {"after": false}
             }
         }],
-        'handle-callback-err': 'off' // 关闭异常必须处理
+        'handle-callback-err': 'off', // 关闭异常必须处理规则
+        'no-unused-vars': 'off' // 关闭变量必须使用规则
     },
     overrides: [
         {

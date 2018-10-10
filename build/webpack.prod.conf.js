@@ -1,19 +1,21 @@
-'use strict'
-const path = require('path')
-const utils = require('./utils')
-const webpack = require('webpack')
-const config = require('../config')
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+'use strict';
+const path = require('path');
+const utils = require('./utils');
+const webpack = require('webpack');
+const config = require('../config');
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.conf');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
-    : require('../config/prod.env')
+    : require('../config/prod.env');
 
 const webpackConfig = merge(baseWebpackConfig, {
     module: {
@@ -30,9 +32,13 @@ const webpackConfig = merge(baseWebpackConfig, {
         chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
     },
     plugins: [
-        // http://vuejs.github.io/vue-loader/en/workflow/production.html
         new webpack.DefinePlugin({
             'process.env': env
+        }),
+        new BundleAnalyzerPlugin(),
+        new CleanWebpackPlugin(config.build.assetsRoot, {
+            root: path.resolve(__dirname, '../'), // 设置root
+            verbose: true
         }),
         new UglifyJsPlugin({
             uglifyOptions: {
@@ -121,7 +127,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             }
         ])
     ]
-})
+});
 
 if(config.build.productionGzip) {
     const CompressionWebpackPlugin = require('compression-webpack-plugin')
@@ -142,8 +148,8 @@ if(config.build.productionGzip) {
 }
 
 if(config.build.bundleAnalyzerReport) {
-    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

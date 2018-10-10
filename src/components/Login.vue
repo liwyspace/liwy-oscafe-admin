@@ -1,22 +1,22 @@
 <template>
     <div id="login">
-        <div class="val user-after">
-            <input type="text" autocomplete="off" placeholder="用户名"
-                   v-model="params.userName"
-                   @blur="requireUserName"
-                   @keyup.enter="login"
-                   class="login-input user">
-            <label id="userName"></label>
+        <div class="login-form">
+            <div>
+                <input type="text" autocomplete="off" placeholder="用户名"
+                       v-model="params.userName"
+                       @blur="requireUserName"
+                       @keyup.enter="login">
+                <label id="userName"></label>
+            </div>
+            <div>
+                <input type="password" autocomplete="new-password" placeholder="密码"
+                       v-model="params.password"
+                       @blur="requirePwd"
+                       @keyup.enter="login">
+                <label id="pwd"></label>
+            </div>
+            <el-button :loading="loading" @click="login" id="loginBtn">登录</el-button>
         </div>
-        <div class="val pwd-after">
-            <input type="password" autocomplete="new-password" placeholder="密码"
-                   v-model="params.password"
-                   @blur="requirePwd"
-                   @keyup.enter="login"
-                   class="login-input user">
-            <label id="pwd"></label>
-        </div>
-        <el-button :loading="loading" class="login-input login-btn" @click="login" id="loginBtn">登录</el-button>
     </div>
 </template>
 
@@ -49,12 +49,10 @@
                     $('#pwd')
                         .addClass('error')
                         .text('请填写密码');
-                    $('#loginBtn').css('background', '#ebcd41');
                 } else {
                     $('#pwd')
                         .removeClass('error')
                         .text(' ');
-                    $('#loginBtn').css('background', '#fee300');
                 }
             },
             login() {
@@ -101,5 +99,39 @@
 </script>
 
 <style lang="scss" scoped>
+    .login-form {
+        width: 400px;
+        height: 260px;
+        background: #8cc5ff;
 
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -200px;
+        margin-top: -130px;
+        padding: 30px;
+
+        input {
+            width: 100%;
+            height: 40px;
+            padding: 5px;
+            line-height: 30px;
+            font-size: 18px;
+            display: block;
+            border: solid 1px #fffdef;
+        }
+        label {
+            display: block;
+            height: 30px;
+            color: red;
+        }
+
+        #loginBtn {
+            width: 100%;
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: bold;
+            letter-spacing: 10px;
+        }
+    }
 </style>

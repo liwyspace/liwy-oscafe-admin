@@ -1,14 +1,15 @@
 <template>
-    <el-aside id="appMenu" style="width: 240px;">
-        <el-scrollbar wrap-style="overflow-x: hidden;">
+    <el-aside id="appMenu" style="width: 220px;">
+        <el-scrollbar wrap-style="overflow-x: hidden;" ref="scrollbar">
             <el-menu
                 default-active="2"
                 @open="handleOpen"
                 @close="handleClose"
+                router
                 background-color="#545c64"
                 text-color="#fff"
                 active-text-color="#ffd04b">
-                <span style="color: #CCC; line-height: 60px;margin-left: 14px;">系统菜单</span>
+                <span class="system-label">系统菜单</span>
                 <template v-for="(item,index) in $store.state.user.routes" v-if="!item.hidden">
                     <el-menu-item v-if="item.leaf" :index="item.path" :key="index">
                         <i class="el-icon-setting"></i>
@@ -43,6 +44,8 @@
 </template>
 
 <script>
+    import ResizeObserver from 'resize-observer-polyfill';
+
     export default {
         name: 'AppMenu',
         methods: {
@@ -51,9 +54,25 @@
             },
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            // 修复el-scrollbar组件当wrap改变时更新
+            repairScrollbar() {
+                const myObserver = new ResizeObserver(entries => {
+                    for(let entry of entries) {
+                        this.$refs.scrollbar.update();
+                    }
+                });
+                myObserver.observe($('#appMenu .el-scrollbar__wrap')[0]);
             }
+        },
+        mounted: function () {
+            this.$nextTick(function () {
+                this.repairScrollbar();
+            });
         }
     };
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -64,12 +83,18 @@
         background: rgb(84, 92, 100);
         border-right: solid 1px #e6e6e6;
 
+        .system-label {
+            color: #cccccc;
+            font-size: 18px;
+            display: block;
+            padding: 20px 20px 10px 20px;
+        }
+
         .el-menu {
             border-right: none;
         }
 
         .el-scrollbar {
-            width: 100%;
             height: 100%;
         }
     }

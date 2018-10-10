@@ -1,13 +1,19 @@
 <template>
     <el-header id="appHeader">
         <div class="header-left">
-            <img src="" alt="" class="header-logo">
-            <a href="javascript:void(0)">左侧</a>
+            <img src="../assets/images/header-logo.png" alt="开源小屋后台管理系统" class="header-logo">
         </div>
         <div class="header-right">
-            <span class="username">{{userName}}</span>
-            <a href="javascript:void(0)" @click="getIndex">查看首页</a>
-            <a href="javascript:void(0)" @click="logout">退出</a>
+            <div class="header-user-group">
+                <img src="../assets/images/userlogo.png" alt="" class="user-logo">
+                <span class="username">{{userName}}</span>
+            </div>
+            <a href="javascript:void(0)" @click="getIndex" class="header-operation">
+                <i class="iconfont icon-home"></i> 查看首页
+            </a>
+            <a href="javascript:void(0)" @click="logout" class="header-operation">
+                <i class="iconfont icon-jinzhi"></i> 退出
+            </a>
         </div>
     </el-header>
 </template>
@@ -42,7 +48,7 @@
 
 <style lang="scss" scoped>
     #appHeader {
-        background: #fff;
+        background: #F0F0F0;
         border-bottom: 1px solid #e0e4e9;
         box-shadow: 10px 1px 15px rgba(0, 0, 0, 0.17);
         transform: translateZ(0);
@@ -57,13 +63,36 @@
             display: flex;
             align-items: center;
             height: 100%;
-            width: 220-24px;
+            .header-logo {
+                height: 40px;
+            }
         }
         .header-right {
             float: right;
             display: flex;
             align-items: center;
             height: 100%;
+
+            .header-user-group {
+                display: flex;
+                height: 100%;
+                line-height: 100%;
+                align-items: center;
+                .user-logo {
+                    width: 32px;
+                    height: 32px;
+                    margin-right: 10px;
+                }
+            }
+            .header-operation {
+                .iconfont {
+                    font-size: 20px;
+                }
+                margin-left: 25px;
+                &:hover {
+                    color: #188ae2;
+                }
+            }
         }
 
         @media screen and(max-width: 700px) {

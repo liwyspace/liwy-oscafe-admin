@@ -63,9 +63,9 @@ export default {
                 $http.post(api.getPerms).then(res => {
                     let asRouters;
                     if(res.body.perms === '*') {
-                        asRouters = asyRoutes;
+                        asRouters = asyRoutes.getRoutes();
                     } else {
-                        asRouters = getansycRoutes(asyRoutes, res.body.perms); // 递归过滤
+                        asRouters = getansycRoutes(asyRoutes.getRoutes(), res.body.perms); // 递归过滤
                     }
                     commit('SET_ROUTERS', {
                         asRouters: asRouters,

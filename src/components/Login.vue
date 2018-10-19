@@ -63,9 +63,8 @@
                     this.loading = true;
                     this.loginFont = '正在登录...';
                     this.$store.dispatch('userLogin', this.params).then(res => {
-                        console.log(res);
                         if(res.code === '200') {
-                            this.$store.dispatch('setRouters').then(res => {
+                            this.$store.dispatch('setPermiss').then(res => {
                                 if(res.code === '200') {
                                     this.$router.addRoutes(this.$store.state.user.addRouters);
                                     this.$router.push('/helloWorld');

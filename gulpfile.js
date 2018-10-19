@@ -13,27 +13,40 @@ gulp.task('mock-server', function () {
         notify: false,
         port: 9000,
         server: {
-            baseDir: ["mock"],
+            baseDir: ["mock/data"],
             index: "index.html",
+            rewriteRules: [
+                {
+                    match: /^\/mock\/static\//,
+                    fn: function (match) {
+                        return '/static/';
+                    }
+                }
+            ],
             middleware: function (req, res, next) {
                 const urlObj = url.parse(req.url, true);
                 const pathname = urlObj.pathname;
                 const paramObj = urlObj.query;
+                console.log(pathname);
+                if(/^\/mock\/api\/.*$/.test(pathname)) {
+                    //将url转换为mock文件名称
+                    const fileName = pathname.replace('/mock/api/', '/').replace(/\/(\w)/g, function (all, letter) {
+                        return letter.toUpperCase();
+                    });
 
-                //将url转换为mock文件名称
-                const fileName = pathname.replace(/\/(\w)/g, function (all, letter) {
-                    return letter.toUpperCase();
-                })
-
-                const fileObj = fileMap[fileName];
-                if(fileObj) {
-                    const mockData = getMockData(fileObj, paramObj);
-                    if(mockData) {
-                        res.setHeader('Access-Control-Allow-Origin', '*');
-                        res.setHeader('Content-Type', 'application/json; charset=utf-8');
-                        res.write(JSON.stringify(mockData));
-                        res.end();
+                    const fileObj = fileMap[fileName];
+                    if(fileObj) {
+                        const mockData = getMockData(fileObj, paramObj);
+                        if(mockData) {
+                            res.setHeader('Access-Control-Allow-Origin', '*');
+                            res.setHeader('Content-Type', 'application/json; charset=utf-8');
+                            res.write(JSON.stringify(mockData));
+                            res.end();
+                        }
                     }
+                } else if(/^\/mock\/static\/.*$/.test(pathname)) {
+                    req.url = req.url.replace(/^\/mock\/static\//, '/static/');
+                    console.log(req.url);
                 }
                 next();
             }
@@ -83,8 +96,11 @@ function initFileMap() {
     const path = './mock/data';
     const files = fs.readdirSync(path);
     files.forEach(function (file) {
-        const data = fs.readFileSync(path + "/" + file);
-        fileMap[file.split('.')[0]] = JSON.parse(data);
+        var info = fs.statSync(path + "/" + file);
+        if(!info.isDirectory()) {
+            const data = fs.readFileSync(path + "/" + file);
+            fileMap[file.split('.')[0]] = JSON.parse(data);
+        }
     });
     console.log("加载mock文件列表...")
     return fileMap;

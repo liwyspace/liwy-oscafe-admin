@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const portfinder = require('portfinder');
+const proxyMock = require('../mock/src');
 
 const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
@@ -25,6 +26,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         clientLogLevel: 'warning',
         historyApiFallback: {
             rewrites: [
+                {
+                    from: /^\/mock/, to: function (context) {
+                        return context.parsedUrl.path
+                    }
+                },
                 {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html')},
             ],
         },
@@ -42,7 +48,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         quiet: true, // necessary for FriendlyErrorsPlugin
         watchOptions: {
             poll: config.dev.poll,
-        }
+        },
+        after: proxyMock
     },
     plugins: [
         new webpack.DefinePlugin({

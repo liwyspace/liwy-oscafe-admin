@@ -33,14 +33,19 @@ export const asyRoutes = {
         for(let index in datas) {
             appendPrefix(appName, datas[index]);
         }
+        console.log(`[${appName}添加路由]：${JSON.stringify(datas)}`);
         asyRoutesData = asyRoutesData.concat(datas);
     }
 };
 
 // 添加路由前缀AppName
 function appendPrefix(appName, route) {
-    route.path = '/' + appName + route.path;
-    route.redirect = '/' + appName + route.redirect;
+    if(route.path) {
+        route.path = '/' + appName + route.path;
+    }
+    if(route.redirect) {
+        route.redirect = '/' + appName + route.redirect;
+    }
 
     for(let index in route.children) {
         appendPrefix(appName, route.children[index]);

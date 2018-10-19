@@ -6,7 +6,9 @@
             <el-container direction="vertical">
                 <el-scrollbar wrap-style="overflow-x: hidden;" id="appMainScroll" ref="mainScrollbar">
                     <el-main>
-                        <router-view></router-view>
+                        <div :class="[appCssClass]">
+                            <router-view></router-view>
+                        </div>
                     </el-main>
                     <app-footer></app-footer>
                 </el-scrollbar>
@@ -27,6 +29,14 @@
             AppHeader,
             AppFooter,
             AppMenu
+        },
+        props: {
+            currAppName: String
+        },
+        computed: {
+            appCssClass() {
+                return this.currAppName ? this.currAppName + '-app' : '';
+            }
         },
         methods: {
             // 修复el-scrollbar组件当wrap改变时更新

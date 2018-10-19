@@ -8,14 +8,24 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const utils = require('./utils');
 
 prodWebpackConfig.entry = {
-    portalSDK: './src/main.js'
+    portalSDK: './src/main-sdk.js'
 };
 
 prodWebpackConfig.output.filename = utils.assetsPath('js/[name].js');
-prodWebpackConfig.output.library = 'PortalSDK';
-prodWebpackConfig.output.libraryTarget = 'umd';
+// prodWebpackConfig.output.library = 'PortalSDK';
+// prodWebpackConfig.output.libraryTarget = 'umd';
 
 prodWebpackConfig.externals = {};
+prodWebpackConfig.module.rules.push({ // 通过expose-loader将jquery暴露到全局变量中
+    test: require.resolve('jquery'),
+    use: [{
+        loader: 'expose-loader',
+        options: 'jQuery'
+    }, {
+        loader: 'expose-loader',
+        options: '$'
+    }]
+});
 
 prodWebpackConfig.plugins = [
     new CleanWebpackPlugin(config.build.assetsRoot, {
@@ -25,12 +35,6 @@ prodWebpackConfig.plugins = [
     new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
         'process.env': require('../config/prod.env')
-    }),
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        'window.$': 'jquery'
     }),
     new webpack.optimize.UglifyJsPlugin({
         compress: {

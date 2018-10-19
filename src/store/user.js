@@ -1,7 +1,7 @@
 import $http from '@/api/http';
 import api from '@/api/api';
 
-import { routes, asyRoutes } from '@/router/routes';
+import {routes, asyRoutes} from '@/router/routes';
 
 /**
  * 递归处理角色权限
@@ -28,9 +28,9 @@ export default {
         isSetPerms: false // 判断是否刷新过页面
     },
     mutations: {
-        SET_ROUTERS: (state, obj) => {
-            state.routes = routes.concat(obj.asRouters); // 设置路由表
-            state.addRouters = obj.asRouters; // 动态路由表
+        SET_ROUTERS: (state, asRouters) => {
+            state.routes = routes.concat(asRouters); // 设置路由表
+            state.addRouters = asRouters; // 动态路由表
             state.isSetPerms = true; // 是否设置权限
         },
         CLEAR_ROUTERS: (state) => {
@@ -43,6 +43,9 @@ export default {
         }
     },
     actions: {
+        setRouters({commit}, asRouters) {
+            commit('SET_ROUTERS', asRouters);
+        },
         userLogin({commit}, params) { // 登录异步操作
             let userName = params.userName;
             let password = params.password;
@@ -58,7 +61,7 @@ export default {
                 });
             });
         },
-        setRouters({commit}) {
+        setPermiss({commit}) {
             return new Promise((resolve, reject) => { // 动态加载路由权限
                 $http.post(api.getPerms).then(res => {
                     let asRouters;
@@ -67,10 +70,7 @@ export default {
                     } else {
                         asRouters = getansycRoutes(asyRoutes.getRoutes(), res.body.perms); // 递归过滤
                     }
-                    commit('SET_ROUTERS', {
-                        asRouters: asRouters,
-                        permsList: res.body.perms
-                    });
+                    commit('SET_ROUTERS', asRouters);
                     resolve(res);
                 }).catch(error => {
                     reject(error);

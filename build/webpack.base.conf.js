@@ -29,7 +29,9 @@ module.exports = {
         filename: '[name].js',
         publicPath: (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'sdk')
             ? config.build.assetsPublicPath
-            : config.dev.assetsPublicPath
+            : config.dev.assetsPublicPath,
+        library: 'PortalSDK',
+        libraryTarget: 'umd'
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
@@ -87,9 +89,6 @@ module.exports = {
         child_process: 'empty'
     },
     externals: {
-        $: "jQuery",
-        jQuery: "jQuery",
-        jquery: "jQuery",
-        "window.jQuery": "jQuery"
+        jquery: "jQuery"
     }
-}
+};

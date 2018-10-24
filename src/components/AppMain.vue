@@ -30,12 +30,9 @@
             AppFooter,
             AppMenu
         },
-        props: {
-            currAppName: String
-        },
         computed: {
             appCssClass() {
-                return this.currAppName ? this.currAppName + '-app' : '';
+                return this.$route.meta.appName ? this.$route.meta.appName + '-app' : '';
             }
         },
         methods: {

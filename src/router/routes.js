@@ -1,13 +1,13 @@
-import Login from '@/components/Login';
+import AppLogin from '@/components/AppLogin';
 import AppMain from '@/components/AppMain';
-import HelloWorld from '@/components/HelloWorld';
+import AppHelloWorld from '@/components/AppHelloWorld';
 
 // 基础路由数据
 export const routes = [
     {
         path: '/login',
         name: '登录',
-        component: Login,
+        component: AppLogin,
         hidden: true
     },
     {
@@ -15,10 +15,10 @@ export const routes = [
         name: '欢迎页',
         leaf: true,
         component: AppMain,
-        redirect: '/helloWorld',
+        redirect: '/hello',
         children: [{
-            path: '/helloWorld',
-            component: HelloWorld
+            path: '/hello',
+            component: AppHelloWorld
         }]
     }
 ];
@@ -46,7 +46,9 @@ function appendPrefix(appName, route) {
     if(route.redirect) {
         route.redirect = '/' + appName + route.redirect;
     }
-
+    route.meta = Object.assign({
+        appName: appName
+    }, route.meta);
     for(let index in route.children) {
         appendPrefix(appName, route.children[index]);
     }

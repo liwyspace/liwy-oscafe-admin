@@ -1,5 +1,5 @@
 <template>
-    <div id="login">
+    <div id="appLogin">
         <div class="login-form">
             <div>
                 <input type="text" autocomplete="off" placeholder="用户名"
@@ -22,7 +22,7 @@
 
 <script>
     export default {
-        name: 'Login',
+        name: 'AppLogin',
         data() {
             return {
                 loading: false,
@@ -98,39 +98,41 @@
 </script>
 
 <style lang="scss" scoped>
-    .login-form {
-        width: 400px;
-        height: 260px;
-        background: #8cc5ff;
+    #appLogin {
+        .login-form {
+            width: 400px;
+            height: 260px;
+            background: #8cc5ff;
 
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -200px;
-        margin-top: -130px;
-        padding: 30px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -200px;
+            margin-top: -130px;
+            padding: 30px;
 
-        input {
-            width: 100%;
-            height: 40px;
-            padding: 5px;
-            line-height: 30px;
-            font-size: 18px;
-            display: block;
-            border: solid 1px #fffdef;
-        }
-        label {
-            display: block;
-            height: 30px;
-            color: red;
-        }
+            input {
+                width: 100%;
+                height: 40px;
+                padding: 5px;
+                line-height: 30px;
+                font-size: 18px;
+                display: block;
+                border: solid 1px #fffdef;
+            }
+            label {
+                display: block;
+                height: 30px;
+                color: red;
+            }
 
-        #loginBtn {
-            width: 100%;
-            font-size: 16px;
-            color: #2c3e50;
-            font-weight: bold;
-            letter-spacing: 10px;
+            #loginBtn {
+                width: 100%;
+                font-size: 16px;
+                color: #2c3e50;
+                font-weight: bold;
+                letter-spacing: 10px;
+            }
         }
     }
 </style>

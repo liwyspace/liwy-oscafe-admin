@@ -50,7 +50,7 @@ export default {
             let userName = params.userName;
             let password = params.password;
             return new Promise((resolve, reject) => {
-                $http.post(api.userLogin, {username: userName, aesPassword: password}).then(res => {
+                $http.post(api.coreLogin, {username: userName, aesPassword: password}).then(res => {
                     if(res.code === '200') {
                         localStorage.setItem('userName', userName);
                         localStorage.setItem('sessionKey', res.body);
@@ -63,7 +63,7 @@ export default {
         },
         setPermiss({commit}) {
             return new Promise((resolve, reject) => { // 动态加载路由权限
-                $http.post(api.getPerms).then(res => {
+                $http.post(api.coreGetUserPerms).then(res => {
                     let asRouters;
                     if(res.body.perms === '*') {
                         asRouters = asyRoutes.getRoutes();
@@ -79,7 +79,7 @@ export default {
         },
         logout({commit}) {
             return new Promise((resolve, reject) => {
-                $http.post(api.userLogout).then(res => {
+                $http.post(api.coreLogout).then(res => {
                     if(res.code === '200') {
                         commit('CLEAR_ROUTERS');
                     }

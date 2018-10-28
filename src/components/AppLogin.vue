@@ -67,7 +67,7 @@
                             this.$store.dispatch('setPermiss').then(res => {
                                 if(res.code === '200') {
                                     this.$router.addRoutes(this.$store.state.user.addRouters);
-                                    this.$router.push('/helloWorld');
+                                    this.$router.push('/');
                                     this.loading = false;
                                 } else {
                                     this.restInfo();

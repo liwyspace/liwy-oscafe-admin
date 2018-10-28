@@ -1,5 +1,6 @@
 export default {
-    userLogin: '/user/login', // 登录
-    getPerms: '/user/getPerms', // 获取权限
-    userLogout: '/user/logout' // 退出
+    coreQueryProjectList: '/core/queryProjectList', // 项目列表
+    coreGetUserPerms: '/core/getUserPerms', // 获取用户权限
+    coreLogin: '/core/login', // 登录
+    coreLogout: '/core/logout' // 退出
 };

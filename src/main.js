@@ -26,6 +26,7 @@ const portalSDK = {
     version: '1.0.0',
     Vue: Vue,
     ElementUI: ElementUI,
+    HttpUtil: $http,
     AppMain: AppMain,
     AppMainChildren: AppMainChildren,
     addRoutes: asyRoutes.setRoutes

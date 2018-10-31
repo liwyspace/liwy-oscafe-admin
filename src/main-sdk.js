@@ -12,6 +12,7 @@ import store from './store'; // vuex
 import {asyRoutes} from './router/routes';
 import AppMain from './components/AppMain';
 import AppMainChildren from './components/AppMainChildren';
+import $http from './api/http';
 
 console.log('------ Portal 开始加载 ------');
 
@@ -37,6 +38,7 @@ const portalSDK = {
     version: '1.0.0',
     Vue: Vue,
     ElementUI: ElementUI,
+    HttpUtil: $http,
     AppMain: AppMain,
     AppMainChildren: AppMainChildren,
     addRoutes: asyRoutes.setRoutes,

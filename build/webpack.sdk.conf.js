@@ -34,7 +34,7 @@ prodWebpackConfig.plugins = [
     }),
     new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
-        'process.env': require('../config/prod.env')
+        'process.env': require('../config/dev.env')
     }),
     new webpack.optimize.UglifyJsPlugin({
         compress: {

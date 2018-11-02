@@ -1,0 +1,26 @@
+{
+    "returnType": "List",
+    "datas": [
+        {
+            "temp_1": "temp_1",
+            "temp_2": "temp_2",
+            "temp_3": "temp_3",
+            "temp_4": "temp_4",
+            "temp_5": "temp_5"
+        },
+        {
+            "temp_1": "temp_1",
+            "temp_2": "temp_2",
+            "temp_3": "temp_3",
+            "temp_4": "temp_4",
+            "temp_5": "temp_5"
+        },
+        {
+            "temp_1": "temp_1",
+            "temp_2": "temp_2",
+            "temp_3": "temp_3",
+            "temp_4": "temp_4",
+            "temp_5": "temp_5"
+        }
+    ]
+}

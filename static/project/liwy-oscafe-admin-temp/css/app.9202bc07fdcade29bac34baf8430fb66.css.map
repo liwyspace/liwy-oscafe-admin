@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.9202bc07fdcade29bac34baf8430fb66.css"],"names":[],"mappings":"AACA,oCACE,eAAiB,CAClB,AACD,0CACE,YAAc,CACf","file":"app.9202bc07fdcade29bac34baf8430fb66.css","sourcesContent":["\n#template .toolbar[data-v-64845088] {\n  margin-top: 20px;\n}\n#template .el-pagination[data-v-64845088] {\n  padding: 20px;\n}\n"]}

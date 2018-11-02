@@ -1,14 +1,13 @@
 import './common/checkBrowserVersion'; // 校验浏览器版本
 import Vue from 'vue';
+import Vuex from 'vuex';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/base.scss';
 import 'jquery';
-
 import App from './App'; // entry component
 import router from './router'; // vue-router
 import store from './store'; // vuex
-
 import {asyRoutes} from './router/routes';
 import AppMain from './components/AppMain';
 import AppMainChildren from './components/AppMainChildren';
@@ -37,7 +36,9 @@ function initPortal() {
 const portalSDK = {
     version: '1.0.0',
     Vue: Vue,
+    Vuex: Vuex,
     ElementUI: ElementUI,
+    Store: store,
     HttpUtil: $http,
     AppMain: AppMain,
     AppMainChildren: AppMainChildren,

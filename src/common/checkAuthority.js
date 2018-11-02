@@ -4,9 +4,6 @@ import store from '@/store';
 /** 路由切换前校验权限 */
 router.beforeEach((to, from, next) => {
     console.log(`[路由切换]：${from.path}->${to.path}`);
-    console.log(router);
-    console.log(router.app);
-    router.app.currAppName = 'liwyapp';
 
     let user = localStorage.getItem('sessionKey');// 登录标示
     let isSetPerms = store.state.user.isSetPerms; // 是否设置过权限

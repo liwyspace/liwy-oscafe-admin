@@ -1,6 +1,7 @@
 import AppLogin from '@/components/AppLogin';
 import AppMain from '@/components/AppMain';
 import AppHelloWorld from '@/components/AppHelloWorld';
+import App404 from '@/components/App404';
 
 // 基础路由数据
 export const routes = [
@@ -14,6 +15,7 @@ export const routes = [
         path: '/',
         name: '欢迎页',
         leaf: true,
+        icon: 'el-icon-menu',
         component: AppMain,
         redirect: '/hello',
         children: [{
@@ -22,6 +24,14 @@ export const routes = [
         }]
     }
 ];
+
+// 后置路由数据
+export const afterRoutes = [{
+    path: '*',
+    name: '404',
+    component: App404,
+    hidden: true
+}];
 
 // 动态路由数据，由子系统添加，并通过权限过滤
 let asyRoutesData = [];

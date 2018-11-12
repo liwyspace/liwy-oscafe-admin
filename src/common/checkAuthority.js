@@ -1,5 +1,6 @@
 import router from '@/router';
 import store from '@/store';
+import {afterRoutes} from '@/router/routes';
 
 /** 路由切换前校验权限 */
 router.beforeEach((to, from, next) => {
@@ -21,6 +22,7 @@ router.beforeEach((to, from, next) => {
                 store.dispatch('setPermiss').then(() => {
                     console.log(`[添加权限路由]：${JSON.stringify(store.state.user.addRouters)}`);
                     router.addRoutes(store.state.user.addRouters);
+                    router.addRoutes(afterRoutes);
                     next({...to}); // hack方法 确保addRoutes已完成
                 });
             }

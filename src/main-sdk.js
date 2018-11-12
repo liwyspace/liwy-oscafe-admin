@@ -8,7 +8,7 @@ import 'jquery';
 import App from './App'; // entry component
 import router from './router'; // vue-router
 import store from './store'; // vuex
-import {asyRoutes} from './router/routes';
+import {asyRoutes, afterRoutes} from './router/routes';
 import AppMain from './components/AppMain';
 import AppMainChildren from './components/AppMainChildren';
 import $http from './api/http';
@@ -23,6 +23,7 @@ function initPortal() {
     console.log(`[添加权限路由]：${JSON.stringify(asyRoutes.getRoutes())}`);
     store.dispatch('setRouters', asyRoutes.getRoutes());
     router.addRoutes(asyRoutes.getRoutes());
+    router.addRoutes(afterRoutes);
 
     new Vue({
         router,
